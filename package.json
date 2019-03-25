@@ -1,12 +1,13 @@
 {
   "name": "excel",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Excel Lib",
   "main": "./lib/index.js",
   "scripts": {
     "clean": "rimraf lib",
     "lint": "eslint src test",
-    "build": "cross-env BABEL_ENV=production babel --presets babel-preset-env src --out-dir lib"
+    "build": "cross-env BABEL_ENV=production babel --presets babel-preset-env src --out-dir lib",
+    "prepublish": "npm run clean && npm run lint && npm run build"
   },
   "files": [
     "lib",
@@ -22,7 +23,7 @@
     "node",
     "javascript"
   ],
-  "author": "Dinesh Pandiyan <flexdinesh@gmail.com>",
+  "author": "TaniGroup <dev@tanigroup.com>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/tanigroup/excel/issues"

@@ -1,5 +1,7 @@
 import XLSX from 'xlsx'
 
+const defaultFileName = 'Excel.xlsx'
+
 export default class Excel {
   constructor() {
     this.workBook = XLSX.utils.book_new()
@@ -28,11 +30,19 @@ export default class Excel {
     return XLSX.utils.sheet_to_html(sheet, options)
   }
 
+  toArrayBuffer() {
+    return XLSX.write(this.workBook, { bookType: 'xlsx', type: 'array' })
+  }
+
+  toFile(fileName = defaultFileName) {
+    return new File([this.toArrayBuffer()], fileName)
+  }
+
   length() {
     return this.workBook.SheetNames.length
   }
 
-  download(fileName = 'Excel.xlsx') {
+  download(fileName = defaultFileName) {
     XLSX.writeFile(this.workBook, fileName)
   }
 }

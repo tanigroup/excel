@@ -1,5 +1,7 @@
 import XLSX from 'xlsx'
+import FileAPI from 'file-api'
 
+const { File } = FileAPI
 const defaultFileName = 'Excel.xlsx'
 
 export default class Excel {

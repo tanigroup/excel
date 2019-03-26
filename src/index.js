@@ -10,9 +10,26 @@ export default class Excel {
     this.count = 1
   }
 
-  addSheet(data, sheetName = null) {
+  addSheet(data, sheetName = null, titleMapping = false) {
     const workSheet = XLSX.utils.json_to_sheet(data)
     const selectedSheetName = sheetName === null ? `Sheet ${this.count}` : sheetName
+    const range = XLSX.utils.decode_range(workSheet['!ref'])
+
+    for (let C = range.s.r; C <= range.e.r; ++C) { // eslint-disable-line
+      const address = `${XLSX.utils.encode_col(C)}1`
+      if (!workSheet[address]) {
+        continue // eslint-disable-line
+      }
+
+      if (!titleMapping) {
+        const name = workSheet[address].v.replace(/([A-Z])/g, ' $1')
+
+        workSheet[address].v = name.charAt(0).toUpperCase() + name.slice(1)
+      } else {
+        workSheet[address].v = titleMapping[workSheet[address].v] || workSheet[address].v
+      }
+    }
+
     XLSX.utils.book_append_sheet(this.workBook, workSheet, selectedSheetName)
     this.count += 1
 

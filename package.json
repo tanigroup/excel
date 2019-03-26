@@ -1,6 +1,6 @@
 {
   "name": "excel",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Excel Lib",
   "main": "./lib/index.js",
   "scripts": {
@@ -48,6 +48,7 @@
     "rimraf": "^2.6.2"
   },
   "dependencies": {
+    "file-api": "^0.10.4",
     "xlsx": "^0.14.1"
   }
 }
